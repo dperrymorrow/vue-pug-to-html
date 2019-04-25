@@ -1,6 +1,6 @@
 "use strict";
 
-const pug = require("pug");
+const jade = require("jade");
 const fs = require("fs");
 
 module.exports = function(filePath) {
@@ -8,11 +8,11 @@ module.exports = function(filePath) {
   let html = "";
 
   return {
-    name: "pug",
+    name: "jade",
 
     convertTemplate() {
       console.log(filePath, contents);
-      html = pug.render(contents, {
+      html = jade.render(contents, {
         doctype: "html",
         pretty: true,
       });
@@ -20,7 +20,7 @@ module.exports = function(filePath) {
     },
 
     saveToFile() {
-      fs.writeFileSync(filePath.replace(".pug", ".html"), html);
+      fs.writeFileSync(filePath.replace(".jade", ".html"), html);
     },
   };
 };
