@@ -5,21 +5,19 @@ const fs = require("fs");
 
 module.exports = function(filePath) {
   const contents = fs.readFileSync(filePath, "utf-8");
-  let html = "";
 
   return {
     name: "pug",
 
     convertTemplate() {
       console.log(filePath, contents);
-      html = pug.render(contents, {
+      return pug.render(contents, {
         doctype: "html",
         pretty: true,
       });
-      return html;
     },
 
-    saveToFile() {
+    saveToFile(html) {
       fs.writeFileSync(filePath.replace(".pug", ".html"), html);
     },
   };

@@ -5,8 +5,8 @@ const pug = require("pug");
 const fs = require("fs");
 
 const TEMPLATE_LANG = {
-  PUG: `PUG`,
-  JADE: `JADE`,
+  PUG: "PUG",
+  JADE: "JADE",
 };
 
 const TEMPLATE_PREFIX = {
@@ -16,7 +16,6 @@ const TEMPLATE_PREFIX = {
 
 module.exports = function(filePath) {
   const contents = fs.readFileSync(filePath, "utf-8");
-  const html = "";
 
   function getVueTemplateLang() {
     if (contents.includes(TEMPLATE_PREFIX.PUG)) {
@@ -72,7 +71,7 @@ module.exports = function(filePath) {
       return findTemplate();
     },
 
-    saveToFile() {
+    saveToFile(html) {
       const formatted = html
         .split("\n")
         .map(line => `  ${line}`)

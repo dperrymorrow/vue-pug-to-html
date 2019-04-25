@@ -7,7 +7,8 @@
     "pugToHtml": "bin/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/",
+    "updateSnapshot": "UPDATE_SNAPSHOT=1 npm test"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "eslint-plugin-prettier": "3.0.0",
     "eslint-plugin-promise": "4.0.1",
     "eslint-plugin-unicorn": "6.0.1",
+    "mocha": "^6.1.4",
     "prettier": "1.14.3"
   }
 }

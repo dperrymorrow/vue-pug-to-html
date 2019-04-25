@@ -28,6 +28,7 @@ else _throwAndExit(`${fileName} was not found`);
 
 if (engine.name === "vue" && !engine.hasSupportedVueTemplate())
   _throwAndExit(`${fileName} does not have a pug template`);
-console.log(chalk.green(engine.convertTemplate()));
-engine.saveToFile();
+const compiledResult = engine.convertTemplate();
+console.log(chalk.green(compiledResult));
+engine.saveToFile(compiledResult);
 process.exit(0);
