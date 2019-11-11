@@ -8,24 +8,20 @@ const chalk = require("chalk");
 const VueEngine = require("./engines/vue");
 const PugEngine = require("./engines/pug");
 
-const args = process.argv;
-const fileName = args[args.length - 1];
-const filePath = path.join(process.cwd(), fileName);
-let engine;
+function _processFile(fileName) {
+  const filePath = path.join(process.cwd(), fileName);
+  const engine = filePath.endsWith(".vue") ? VueEngine(filePath) : PugEngine(filePath);
 
-const _throwAndExit = msg => {
-  console.log(chalk.red(msg));
-  process.exit();
-};
+  if (engine.name === "vue" && !engine.hasVueTemplate()) {
+    console.log(chalk.yellow(`${fileName} does not have a pug template`));
+    return;
+  }
 
-if (!fs.existsSync(filePath)) _throwAndExit(`${fileName} was not found`);
+  engine.convertTemplate();
+  console.log(chalk.green(`${fileName} converted!!`));
+  engine.saveToFile();
+}
 
-if (filePath.includes(".vue")) engine = VueEngine(filePath);
-else if (filePath.includes(".pug")) engine = PugEngine(filePath);
-else _throwAndExit(`${fileName} was not found`);
-
-if (engine.name === "vue" && !engine.hasVueTemplate())
-  _throwAndExit(`${fileName} does not have a pug template`);
-console.log(chalk.green(engine.convertTemplate()));
-engine.saveToFile();
-process.exit();
+fs.readdirSync(process.cwd())
+  .filter(file => file.endsWith(".vue"))
+  .forEach(_processFile);
