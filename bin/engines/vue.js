@@ -29,7 +29,7 @@ module.exports = function(filePath) {
 
     convertTemplate() {
       html = pug
-        .render(findTemplate(), { pretty: true })
+        .render(findTemplate(), { pretty: true, doctype: 'html' })
         .replace(new RegExp('v-else="v-else"', `g`), "v-else")
         .replace(new RegExp("&gt;", `g`), ">")
         .replace(new RegExp("&amp;", `g`), "&")
