@@ -21,7 +21,7 @@
   "homepage": "https://github.com/dperrymorrow/vue-pug-to-html#readme",
   "dependencies": {
     "chalk": "^2.4.1",
-    "pug": "^2.0.3"
+    "pug": "^3.0.1"
   },
   "devDependencies": {
     "eslint": "5.9.0",
